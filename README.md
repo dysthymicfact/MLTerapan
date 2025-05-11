@@ -13,3 +13,21 @@ Lin, Y., Liu, Y., Fan, W., Tuunainen, V. K., & Deng, S. (2021). Revisiting the r
 Reuter, P. R., Forster, B. L., & Brister, S. R. (2020). The influence of eating habits on the academic performance of university students. Journal of American College Health. 1-7. DOI: https://doi.org/10.1080/07448481.2020.1715986 </br>
 Troll, E. S., Friese, M., & Loschelder, D. D. (2020). How students' self-control and smartphone-use explain their academic performance. Computers in Human Behavior. 117 (Preprint). DOI: https://doi.org/10.1016/j.chb.2020.106624 </br>
 Yağcı, M. (2022). Educational data mining: prediction of students’ academic performance using machine learning algorithms. Smart Learning Environments, 9(1), 1-19. DOI: https://doi.org/10.1186/s40561-022-00192-z
+
+## Business Understanding
+Dalam konteks analisis dan prediksi kinerja akademik, diperlukan pemahaman komprehensif tentang faktor-faktor yang memengaruhi hasil belajar mahasiswa dan potensi data mining untuk membantu analisis ini. Kinerja akademik dipengaruhi oleh berbagai elemen, termasuk kebiasaan gaya hidup seperti _screen time_, pola tidur, dan kebiasaan makan, serta analisis data siswa dapat mengungkapkan pola dan memungkinkan prediksi pencapaian akademik. Pemahaman ini penting untuk studi yang bertujuan mengidentifikasi siswa berisiko, mengoptimalkan lingkungan belajar, dan mengembangkan intervensi untuk mendukung keberhasilan siswa.
+
+## Problem Statements
+- Pernyataan Masalah 1: Dari serangkaian atribut(fitur) yang ada, atribut(fitur) apa yang paling berpengaruh terhadap nilai ujian mahasiswa (exam score)?
+- Pernyataan Masalah 2: Apa model terbaik yang dapat digunakan untuk memprediksi nilai ujian mahasiswa (exam score)?
+
+## Goals
+- Tujuan 1: Mengidentifikasi atribut(fitur) yang paling berkorelasi terhadap nilai ujian mahasiswa (exam score)
+- Tujuan 2: Menemukan model terbaik berdasarkan akurasi tertinggi untuk memprediksi nilai ujian mahasiswa (exam score)
+
+**Rubrik/Kriteria Tambahan**:
+### Solution statements
+- Membangun model baseline menggunakan Linear Regression
+- Membangun model alternatif menggunakan Random Forest dan Support Vector Machine (SVM)
+- Mengukur performa model menggunakan MAE, MSE, dan R2 Score
+- Memilih model terbaik berdasarkan nilai MAE dan MSE terendah serta R2 Score tertinggi
