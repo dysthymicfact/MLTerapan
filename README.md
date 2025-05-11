@@ -9,7 +9,7 @@ Sejalan dengan itu, _Educational Data Mining_ (EDM) memanfaatkan machine learnin
 
 - Referensi: </br>
 Alotaibi, A. D., Alosaimi, F. M., Alajlan, A. A., & Bin Abdulrahman, K. A. (2020). The relationship between sleep quality, stress, and academic performance among medical students. Journal of Family and Community Medicine, 27(1), 23-28. DOI: 10.4103/jfcm.JFCM_132_19 </br>
-Lin, Y., Liu, Y., Fan, W., Tuunainen, V. K., & Deng, S. (2021). Revisiting the relationship between smartphone use and academic performance: A large-scale study. Computers in Human5 Behavior, 122, 106835.6 </br>
-Reuter, P. R., Forster, B. L., & Brister, S. R. (2020). The influence of eating habits on the academic performance of university students.3 Journal of American College Health.4 DOI: 10.1080/07448481.2020.1715986 </br>
-Troll, E. S., Friese, M., & Loschelder, D. D. (2020). How students' self-control and smartphone-use explain their academic performance. (Preprint).  DOI: 10.1016/j.chb.2020.106624 </br>
+Lin, Y., Liu, Y., Fan, W., Tuunainen, V. K., & Deng, S. (2021). Revisiting the relationship between smartphone use and academic performance: A large-scale study. Computers in Human Behavior, 122, DOI: https://doi.org/10.1016/j.chb.2021.106835 </br>
+Reuter, P. R., Forster, B. L., & Brister, S. R. (2020). The influence of eating habits on the academic performance of university students. Journal of American College Health. 1-7. DOI: https://doi.org/10.1080/07448481.2020.1715986 </br>
+Troll, E. S., Friese, M., & Loschelder, D. D. (2020). How students' self-control and smartphone-use explain their academic performance. Computers in Human Behavior. 117 (Preprint). DOI: https://doi.org/10.1016/j.chb.2020.106624 </br>
 Yağcı, M. (2022). Educational data mining: prediction of students’ academic performance using machine learning algorithms. Smart Learning Environments, 9(1), 1-19. DOI: https://doi.org/10.1186/s40561-022-00192-z
