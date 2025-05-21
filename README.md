@@ -65,15 +65,15 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
      
 2. Mengecek deskripsi statistik dengan fungsi `describe()`\
    **Informasi yang dihasilkan:**
-   - Study hours vs Entertainment (social media dan netflix hours)
+   - Study hours vs Entertainment (social media dan netflix hours) \
      Rata-rata waktu belajar adalah 3,5 jam per hari tetapi waktu rata-rata bermain sosial media 2,5 jam dan netflix 1,82 jam. Apabila waktu bermain socmed dan netflix dijumlahkan maka lebih banyak waktu yang digunakan untuk hiburan daripada belajar
-   - Sleep hours
+   - Sleep hours \
      Rata-rata tidur 6,47 jam dengan standar deviasi 1,23 menyiratkan bahwa ada individu yang lebih sedikit atau lebih banyak tidur dari rata-rata sehingga bisa memengaruhi energi dan fokus saat belajar
-   - Exercise frequency
+   - Exercise frequency \
      Olahraga rata-rata 3x dalam 1minggu, menunjukkan sebagian mahasiswa aktif berolahraga tetapi ada yang mungkin kurang memperhatikan kegiatan fisik
-   - Attendace vs Exam Score
+   - Attendace vs Exam Score \
      Rata-rata kehadiran adalah 84,135 tetapi nilai ujian 69,60. Perlu ditelusuri alasan lain penyebab nilai ujian cenderung rendah
-   - Mental health rating
+   - Mental health rating \
      Rata-rata kesehatan mental mahasiswa adalah 5,44 dari 10 dengan standar deviasi 2,85 menunjukkan variasi yang cukup besar. Perlu ditelusuri lebih lanjut faktor eksternal lainnya (seperti pola hidup dan kebiasaan mahasiswa)
 
 3. Mengecek dan menangani missing value dengan fungsi `isnull().sum()` serta data duplikat dengan fungsi `duplicated().sum()`
@@ -89,7 +89,67 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
 
 5. Melakukan univariate analysis terhadap masing-masing fitur dengan `countplot` dan `histogram` </br>
    **Informasi yang dihasilkan:** </br>
-   a. Fitur Kategorikal
-   - Grafik fitur gender menunjukkan bahwa persentase perempuan hampir imbang dengan laki-laki yakni 48,1% dan 47,7%, sedangkan sisanya adalah lainnya sebesar 4,2% </br>
-     Visualisasi: </br>
-     
+   a. Fitur Kategorikal 
+   - Grafik fitur gender menunjukkan bahwa persentase perempuan hampir imbang dengan laki-laki yakni 48,1% (481 sampel) dan 47,7% (477 sampel), sedangkan sisanya adalah lainnya sebesar 4,2% (42 sampel) \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/gender.png?raw=true)
+   - Grafik fitur part_time_job menunjukkan bahwa terdapat mahasiswa yang bekerja part time sebanyak 215 mahasiswa, sementara mayoritas tidak bekerja part time sebanyak 785 mahasiswa \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/partTime.png?raw=true)
+   - Grafik fitur diet_quality menunjukkan bahwa kebanyakan mahasiswa menjalani diet berkategori seimbang (Fair=437 sampel), diikuti diet berkategori baik (Good=378 sampel), dan sisanya tidak menjalani diet (185 sampel). Ini menyiratkan bahwa mahasiswa mayoritas memperhatikan pola makan gizi seimbang untuk menjaga kesehatan tubuh \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/diet.png?raw=true)
+   - Grafik fitur parental_education_level menunjukkan bahwa latar belakang pendidikan orang tua mahasiswa mayoritas adalah High School atau lulusan SMA (48,3%) dan Bachelor atau lulusan Sarjana (35%). Sisanya berlatar belakang pendidikan Master atau lulusan Magister (16,7%) \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/parentEdu.png?raw=true)
+   - Grafik internet_quality menunjukkan bahwa mayoritas mahasiswa sudah memiliki kualitas internet yang baik karena persentase kategori Good adalah 44,7% diikuti Average adalah 39,1%. Sisanya masih memiliki kualitas internet yang buruk (16,2%). Ini menyiratkan bahwa mayoritas mahasiswa sudah tidak memiliki kendala akses internet dalam mengikuti pembelajaran daring atau pengerjaan tugas online \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/internet.png?raw=true)
+   - Grafik extracurricular_participation menunjukkan bahwa kebanyakan mahasiswa tidak aktif mengikuti kegiatan ekstrakurikuler sebagai kegiatan di luar ruang lingkup akademik (No=68,2%; Yes=31,8%). Ini menyiratkan bahwa semestinya mahasiswa tidak mengalami kendala belajar karena terlalu sibuk mengikuti kegiatan ekstrakurikuler \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/ekskul.png?raw=true) 
+
+ b. Fitur Numerik
+  - Rentang usia mahasiswa adalah 17 hingga 24 tahun, dengan puncak usia adalah 20 tahun
+  - Sebagian besar mahasiswa belajar sekitar 2–4 jam per hari, dengan puncak di 3 jam
+  - Rata-rata waktu yang dihabiskan di media sosial sekitar 2–4 jam, sementara Netflix berkisar antara 0–3 jam, dengan puncak di 0 jam
+  - Mayoritas mahasiswa memiliki tingkat kehadiran tinggi, berkisar antara 80–100%, dengan puncak di 100%
+  - Sebagian besar mahasiswa tidur antara 6–8 jam, dengan puncak di sekitar 6-7 jam, mencerminkan pola tidur yang ideal
+  - Variasi dalam kebiasaan olahraga, dengan puncak di 1, 3, dan 6 kali per minggu, menunjukkan bahwa sebagian mahasiswa cukup aktif berolahraga
+  - Rating kesehatan mental tersebar cukup merata, dengan beberapa puncak di 1, 3, 4, 6, dan 8, mengindikasikan variabilitas kondisi psikologis mahasiswa
+  - Sebagian besar mahasiswa mendapatkan nilai ujian antara 60–80, dengan puncak di 100, menunjukkan adanya kelompok mahasiswa dengan performa akademik sangat tinggi \
+    Visualisasi: \
+    ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/numericfeatures.png?raw=true) 
+
+6. Melakukan multivariate analysis untuk menilai relasi antar fitur terhadap fitur target (exam_score) \
+ a. Fitur Kategorikal (menggunakan catplot) 
+   - Fitur gender \
+    Visualisasi: \
+    ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis.png?raw=true) \
+    Informasi yang diperoleh: \
+    Tidak ada perbedaan signifikan dalam rata-rata nilai ujian terhadap gender (Female, Male, dan Other) karena hampir seluruh gender memiliki rata-rata nilai ujian mendekati 70. Perbedaan kecil ini menunjukkan bahwa gender bukanlah faktor yang menentukan performa akademik (exam_score) 
+   - Fitur part_time_job \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis1.png?raw=true) \
+     Informasi yang diperoleh: \
+     Meskipun terdapat perbedaan pada kategori fitur part_time_job, gap antara kedua kategori (Yes/No) tidak terlampau besar sehingga bekerja paruh waktu tidak secara langsung menyebabkan nilai ujian menjadi turun drastis. Fenomena ini menunjukkan bahwa beberapa siswa mampu mengelola waktu dengan baik antara bekerja dan belajar sehingga tetap dapat mempertahankan performa akademik (exam_score)
+   - Fitur diet_quality \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis2.png?raw=true) \
+     Informasi yang diperoleh: \
+     Fitur diet_quality memiliki korelasi dengan performa akademik (exam_score), tetapi pola makan yang baik (Good) tidak selalu menghasilkan nilai ujian tertinggi. Pola makan yang seimbang dan fleksibel (Fair) cenderung lebih optimal dibandingkan yang terlalu ketat atau buruk (Poor)
+   - Fitur parental_education_level \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis3.png?raw=true) \
+     Informasi yang diperoleh: \
+     Pada fitur parental_education_level, Master memiliki rata-rata exam score paling rendah dibandingkan High School dan Bachelor. Fenomena ini menunjukkan bahwa tingkat pendidikan orang tua tidak selalu berbanding lurus dengan performa akademik anak (exam_score)
+   - Fitur internet_quality \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis4.png?raw=true) \
+     Informasi yang diperoleh: \
+     Pada fitur internet_quality, rata-rata nilai ujian (exam_score) tidak memiliki perbedaan signifikan berdasarkan kualitas internet (internet_quality), karena semua kategori —Average, Poor, dan Good — memiliki nilai ujian yang hampir sama, sekitar 70. Hal ini menunjukkan bahwa dalam dataset ini, internet quality tampaknya bukan faktor utama yang memengaruhi performa akademik
+   - fitur extracurricular_participation \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis5.png?raw=true) \
+     Informasi yang diperoleh: \
+     Untuk fitur extracurricular_participation, tidak ada perbedaan signifikan dalam nilai ujian (exam_score) antara mahasiswa yang mengikuti ekstrakurikuler dan yang tidak. Peristiwa ini menunjukkan bahwa partisipasi dalam kegiatan tambahan di luar akademik (ekstrakurikuler) mungkin bukan faktor utama yang memengaruhi performa akademik
