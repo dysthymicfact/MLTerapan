@@ -81,8 +81,15 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
    - Terdapat 91 nilai kosong pada fitur kolom parental_education_level dan tidak ditemukan duplikasi data
    - Mengisi missing values dengan nilai kosong dalam fitur kolom parental_education_level karena merupakan fitur kategorikal sehingga missing values menjadi tidak terdapat pada seluruh kolom fitur
 
-4. Mendeteksi outlier pada kolom fitur numerik
-   **Informasi yang diperoleh:**
-   Visualisasi:\
-   
-   
+4. Mendeteksi outlier pada kolom fitur numerik </br>
+   Visualisasi: </br>
+   ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/pict1.png?raw=true)
+    **Informasi yang diperoleh:** </br>
+    Hanya sedikit data outlier yang ditemukan pada kolom fitur numerik yaitu pada study_hours_per_day, social_media_hours, netflix_hours, attendance_percentage dan exam_score. Outlier ini dibiarkan karena dapat membantu model belajar pola yang lebih umum tanpa dipengaruhi oleh data ekstrem yang mungkin tidak merepresentasikan populasi sebenarnya
+
+5. Melakukan univariate analysis terhadap masing-masing fitur dengan `countplot` dan `histogram` </br>
+   **Informasi yang dihasilkan:** </br>
+   a. Fitur Kategorikal
+   - Grafik fitur gender menunjukkan bahwa persentase perempuan hampir imbang dengan laki-laki yakni 48,1% dan 47,7%, sedangkan sisanya adalah lainnya sebesar 4,2% </br>
+     Visualisasi: </br>
+     
