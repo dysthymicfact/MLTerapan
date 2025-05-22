@@ -34,7 +34,7 @@ Analisis kinerja akademik mahasiswa bertujuan untuk memahami faktor-faktor utama
 - Memilih model terbaik berdasarkan nilai MAE dan MSE terendah serta R2 Score tertinggi
 
 ## Data Understanding
-Dataset yang digunakan dalam proyek ini adalah "Student Habits vs Academic Performance", dapat diakses dan diunduh dari platform Kaggle melalui [tautan]: https://www.kaggle.com/datasets/jayaantanaath/student-habits-vs-academic-performance/croissant/download. Dataset ini berisi informasi mengenai berbagai kebiasaan belajar dan gaya hidup mahasiswa serta nilai ujian akhir mereka. Tujuan dari penggunaan dataset ini adalah untuk menganalisis potensi hubungan antara kebiasaan-kebiasaan tersebut dengan kinerja akademik mahasiswa.
+Dataset yang digunakan dalam proyek ini adalah "Student Habits vs Academic Performance", dapat diakses dan diunduh dari platform Kaggle melalui [tautan](https://www.kaggle.com/datasets/jayaantanaath/student-habits-vs-academic-performance/croissant/download). Dataset ini berisi informasi mengenai berbagai kebiasaan belajar dan gaya hidup mahasiswa serta nilai ujian akhir mereka. Tujuan dari penggunaan dataset ini adalah untuk menganalisis potensi hubungan antara kebiasaan-kebiasaan tersebut dengan kinerja akademik mahasiswa.
 
 Variabel-variabel (fitur) yang terdapat dalam dataset "Student Habits vs Academic Performance" adalah sebagai berikut:
 - student_id: kode unik atau identifikasi untuk setiap mahasiswa dalam dataset
@@ -62,7 +62,7 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
    - Terdapat 7 kolom bertipe object yaitu student_id, gender, part_time_job, diet_quality, parental_education_level, internet_quality dan extracurricular_participation
    - Terdapat 3 kolom bertipe integer yaitu age, exercise_frequency, dan mental_health_rating
    - Terdapat 6 kolom bertipe float54 yaitu study_hours_per_day, social_media_hours, netflix_hours, attendace_percentage, sleep_hours, dan exam_score
-     
+
 2. Mengecek deskripsi statistik dengan fungsi `describe()`\
    **Informasi yang dihasilkan:**
    - Study hours vs Entertainment (social media dan netflix hours) \
@@ -109,7 +109,7 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
      Visualisasi: \
      ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/ekskul.png?raw=true) 
 
- b. Fitur Numerik
+ b. Fitur Numerikal
   - Rentang usia mahasiswa adalah 17 hingga 24 tahun, dengan puncak usia adalah 20 tahun
   - Sebagian besar mahasiswa belajar sekitar 2–4 jam per hari, dengan puncak di 3 jam
   - Rata-rata waktu yang dihabiskan di media sosial sekitar 2–4 jam, sementara Netflix berkisar antara 0–3 jam, dengan puncak di 0 jam
@@ -122,7 +122,7 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/numericfeatures.png?raw=true) 
 
 6. Melakukan multivariate analysis untuk menilai relasi antar fitur terhadap fitur target (exam_score) \
- a. Fitur Kategorikal (menggunakan catplot) 
+ a. Fitur Kategorikal (menggunakan `catplot`) 
    - Fitur gender \
     Visualisasi: \
     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis.png?raw=true) \
@@ -152,4 +152,20 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
      Visualisasi: \
      ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/multianalisis5.png?raw=true) \
      Informasi yang diperoleh: \
-     Untuk fitur extracurricular_participation, tidak ada perbedaan signifikan dalam nilai ujian (exam_score) antara mahasiswa yang mengikuti ekstrakurikuler dan yang tidak. Peristiwa ini menunjukkan bahwa partisipasi dalam kegiatan tambahan di luar akademik (ekstrakurikuler) mungkin bukan faktor utama yang memengaruhi performa akademik
+     Untuk fitur extracurricular_participation, tidak ada perbedaan signifikan dalam nilai ujian (exam_score) antara mahasiswa yang mengikuti ekstrakurikuler dan yang tidak. Peristiwa ini menunjukkan bahwa partisipasi dalam kegiatan tambahan di luar akademik (ekstrakurikuler) mungkin bukan faktor utama yang memengaruhi performa akademik \
+
+b. Fitur Numerikal (menggunakan `pairplot` dan `heatmap`) \
+     Visualisasi: \
+     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/corr%20matrix.png?raw=true) \
+     Informasi yang diperoleh: \
+    - Study hours memiliki korelasi sangat kuat (0.83) dengan exam score, menunjukkan bahwa semakin lama mahasiswa menghabiskan waktu untuk belajar, semakin tinggi nilai ujian yang mereka peroleh. Dengan hubungan yang hampir mendekati 1, variabel ini menjadi prediktor utama dalam menentukan performa akademik, mengindikasikan bahwa alokasi waktu belajar yang cukup dan efektif berkontribusi langsung terhadap pencapaian akademik yang lebih baik \
+    - Sleep hours memiliki korelasi positif lemah (0.12) dengan exam score, menunjukkan bahwa durasi tidur yang lebih lama memiliki sedikit hubungan dengan peningkatan performa akademik, tetapi tidak dalam skala yang signifikan. Meskipun pola tidur yang cukup bisa membantu dalam fokus dan pemulihan mental, data ini mengindikasikan bahwa jumlah jam tidur bukan faktor utama yang secara langsung menentukan keberhasilan ujian mahasiswa \
+    - Exercise frequency memiliki korelasi positif lemah (0.16) dengan exam score, yang menunjukkan bahwa frekuensi olahraga mungkin memiliki sedikit efek positif terhadap performa ujian, tetapi bukan faktor utama yang mendorong keberhasilan akademik. Bisa jadi aktivitas fisik membantu dalam keseimbangan mental dan fisik mahasiswa, meningkatkan daya tahan dan fokus belajar, tetapi kontribusinya tetap kecil dibandingkan dengan waktu yang dialokasikan untuk belajar secara langsung \
+    - Mental health rating memiliki korelasi moderat (0.32) dengan exam score, yang berarti bahwa semakin baik kesehatan mental mahasiswa, semakin besar kemungkinan mereka mendapatkan nilai ujian yang lebih tinggi. Ini mengindikasikan bahwa kesejahteraan psikologis memiliki peran yang lebih signifikan dibandingkan pola tidur atau frekuensi olahraga, di mana mahasiswa yang lebih sehat secara mental mungkin memiliki strategi coping yang lebih baik, manajemen stres yang lebih efektif, dan motivasi akademik yang lebih tinggi \
+    
+## Data Preparatio
+Tahap ini dilakukan untuk mempersiapkan data supaya siap untuk proses pemodelan. Adapun beberapa tahapan persiapan data, yaitu:
+1. Seleksi fitur
+2. Encoding fitur kategori
+3. Pembagian dataset dengan fungsi `train_test_split` dari library sklearn
+4. Standardisasi
