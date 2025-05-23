@@ -163,9 +163,20 @@ b. Fitur Numerikal (menggunakan `pairplot` dan `heatmap`) \
     - Exercise frequency memiliki korelasi positif lemah (0.16) dengan exam score, yang menunjukkan bahwa frekuensi olahraga mungkin memiliki sedikit efek positif terhadap performa ujian, tetapi bukan faktor utama yang mendorong keberhasilan akademik. Bisa jadi aktivitas fisik membantu dalam keseimbangan mental dan fisik mahasiswa, meningkatkan daya tahan dan fokus belajar, tetapi kontribusinya tetap kecil dibandingkan dengan waktu yang dialokasikan untuk belajar secara langsung \
     - Mental health rating memiliki korelasi moderat (0.32) dengan exam score, yang berarti bahwa semakin baik kesehatan mental mahasiswa, semakin besar kemungkinan mereka mendapatkan nilai ujian yang lebih tinggi. Ini mengindikasikan bahwa kesejahteraan psikologis memiliki peran yang lebih signifikan dibandingkan pola tidur atau frekuensi olahraga, di mana mahasiswa yang lebih sehat secara mental mungkin memiliki strategi coping yang lebih baik, manajemen stres yang lebih efektif, dan motivasi akademik yang lebih tinggi \
     
-## Data Preparatio
+## Data Preparation
 Tahap ini dilakukan untuk mempersiapkan data supaya siap untuk proses pemodelan. Adapun beberapa tahapan persiapan data, yaitu:
 1. Seleksi fitur
+   Pada bagian ini, fitur student_id, age, dan attendance_percentage di drop karena memiliki korelasi yang rendah terhadap fitur target nilai ujian (exam_score)
 2. Encoding fitur kategori
-3. Pembagian dataset dengan fungsi `train_test_split` dari library sklearn
-4. Standardisasi
+   Bagian ini dilakukan karena model regresi membutuhkan input numerik. Oleh karena itu, fitur kategori bertipe object perlu dikonversi ke bentuk numerik agar model dapat memahami data dengan baik. Encoding dilakukan dalam dua metode berikut:\
+   1). Label Encoding
+    - Mengonversi kategori menjadi integer (0, 1, 2, ... n) berdasarkan urutan yang logis 
+    - Digunakan untuk parental_education_level dan internet_quality, karena kategori ini memiliki tingkat berjenjang yang bisa direpresentasikan dengan angka \
+   2). One-Hot Encoding
+    - Mengubah setiap kategori menjadi kolom biner terpisah untuk fitur yang tidak memiliki urutan logis 
+    - Digunakan untuk gender, part_time_job, diet_quality, dan extracurricular_participation, karena kategori dalam fitur ini bersifat nominal dan tidak memiliki hubungan berjenjang antar nilai 
+    - Parameter `drop_first=True` digunakan agar menghindari dummy variable trap, sehingga hanya satu kolom yang dibuat untuk setiap variabel biner 
+3. Dataset Splitting
+   Target utama adalah fitur exam_score, yang akan digunakan untuk mengukur akurasi prediksi kategori kelas prestasi terbaik. Oleh karena itu, fitur ini akan dipisahkan dari data utama dan disimpan dalam variabel baru. Dataset dibagi menjadi data training (80%) untuk melatih model dan data testing (20%) untuk menguji performa model menggunakan data yang belum dilatih. Pembagian dilakukan dengan train_test_split dari scikit-learn, memastikan distribusi data tetap representatif
+4. Feature Scaling (Standardisasi)
+   Pada bagian ini, digunakan `StandardScaler` terhadap data yang telab di split sebelumnya. Hasilnya distribusi angka rentang 1,0,-1. Hal ini dilakukan agar algoritma tidak terpengaruh oleh perbedaan skala antar fitur
