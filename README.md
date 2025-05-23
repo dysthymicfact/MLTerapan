@@ -165,9 +165,9 @@ b. Fitur Numerikal (menggunakan `pairplot` dan `heatmap`) \
     
 ## Data Preparation
 Tahap ini dilakukan untuk mempersiapkan data supaya siap untuk proses pemodelan. Adapun beberapa tahapan persiapan data, yaitu:
-1. Seleksi fitur
+1. Seleksi fitur \
    Pada bagian ini, fitur student_id, age, dan attendance_percentage di drop karena memiliki korelasi yang rendah terhadap fitur target nilai ujian (exam_score)
-2. Encoding fitur kategori
+2. Encoding fitur kategori \
    Bagian ini dilakukan karena model regresi membutuhkan input numerik. Oleh karena itu, fitur kategori bertipe object perlu dikonversi ke bentuk numerik agar model dapat memahami data dengan baik. Encoding dilakukan dalam dua metode berikut:\
    1). Label Encoding
     - Mengonversi kategori menjadi integer (0, 1, 2, ... n) berdasarkan urutan yang logis 
@@ -176,7 +176,145 @@ Tahap ini dilakukan untuk mempersiapkan data supaya siap untuk proses pemodelan.
     - Mengubah setiap kategori menjadi kolom biner terpisah untuk fitur yang tidak memiliki urutan logis 
     - Digunakan untuk gender, part_time_job, diet_quality, dan extracurricular_participation, karena kategori dalam fitur ini bersifat nominal dan tidak memiliki hubungan berjenjang antar nilai 
     - Parameter `drop_first=True` digunakan agar menghindari dummy variable trap, sehingga hanya satu kolom yang dibuat untuk setiap variabel biner 
-3. Dataset Splitting
+3. Dataset Splitting \
    Target utama adalah fitur exam_score, yang akan digunakan untuk mengukur akurasi prediksi kategori kelas prestasi terbaik. Oleh karena itu, fitur ini akan dipisahkan dari data utama dan disimpan dalam variabel baru. Dataset dibagi menjadi data training (80%) untuk melatih model dan data testing (20%) untuk menguji performa model menggunakan data yang belum dilatih. Pembagian dilakukan dengan train_test_split dari scikit-learn, memastikan distribusi data tetap representatif
-4. Feature Scaling (Standardisasi)
+4. Feature Scaling (Standardisasi) \
    Pada bagian ini, digunakan `StandardScaler` terhadap data yang telab di split sebelumnya. Hasilnya distribusi angka rentang 1,0,-1. Hal ini dilakukan agar algoritma tidak terpengaruh oleh perbedaan skala antar fitur
+
+
+## Modelling  
+Tahap ini mencakup pengembangan model *machine learning* untuk memprediksi performa akademik mahasiswa melalui fitur **exam_score**. Model yang digunakan meliputi **Linear Regression, Random Forest Regressor, SVM Regressor, dan Gradient Boosting Regressor**. Evaluasi dilakukan untuk menentukan model dengan hasil prediksi terbaik berdasarkan metrik performa.  
+
+### **1. Linear Regression**  
+Model regresi dasar yang mencoba menemukan hubungan linear antara fitur dan target.  
+
+- **Parameter yang digunakan:** Default dari `LinearRegression()`  
+- **Kelebihan:**  
+  - Sederhana dan cepat untuk dilatih  
+  - Mudah diinterpretasikan  
+- **Kekurangan:**  
+  - Tidak mampu menangkap hubungan non-linear  
+  - Sensitif terhadap outlier  
+
+### **2. Random Forest Regressor**  
+Metode *ensemble* berbasis pohon keputusan yang menggabungkan banyak pohon untuk meningkatkan akurasi dan mengurangi *overfitting*.  
+
+- **Parameter yang digunakan:**  
+  - `n_estimators=100`: jumlah pohon dalam hutan  
+  - `random_state=42`: menjaga konsistensi hasil  
+- **Kelebihan:**  
+  - Mampu menangani data kompleks dan hubungan non-linear  
+  - Tidak mudah *overfitting* karena menggunakan banyak pohon  
+- **Kekurangan:**  
+  - Model cukup kompleks dan sulit diinterpretasikan  
+  - Waktu pelatihan lebih lama dibandingkan Linear Regression  
+
+### **3. SVM Regressor**  
+Metode regresi berbasis **Support Vector Machine (SVM)** yang berusaha menemukan hiperplane optimal untuk prediksi nilai ujian.  
+
+- **Parameter yang digunakan:**  
+  - `kernel='rbf'`: menggunakan **Radial Basis Function (RBF)** untuk menangkap pola non-linear  
+  - `C=1.0`: parameter regulasi untuk mengontrol kompleksitas model  
+  - `epsilon=0.1`: batas toleransi untuk kesalahan prediksi  
+- **Kelebihan:**  
+  - Dapat menangkap hubungan non-linear dengan kernel seperti **RBF**  
+  - Cocok untuk data dengan **outlier minimal**  
+- **Kekurangan:**  
+  - Waktu komputasi lebih tinggi dibandingkan model regresi lainnya  
+  - Sulit untuk diinterpretasikan dalam analisis bisnis  
+
+### **4. Gradient Boosting Regressor**  
+Metode *boosting* yang membangun model secara bertahap, di mana setiap model baru berusaha memperbaiki kesalahan dari model sebelumnya.  
+
+- **Parameter yang digunakan:**  
+  - `n_estimators=100`: jumlah tahap boosting  
+  - `max_depth=3`: kedalaman maksimum setiap pohon  
+  - `learning_rate=0.1`: kontribusi setiap pohon terhadap model akhir  
+  - `random_state=42`: menjaga konsistensi hasil  
+- **Kelebihan:**  
+  - Akurasi prediksi tinggi  
+  - Dapat menangani hubungan kompleks dalam data  
+- **Kekurangan:**  
+  - Waktu pelatihan lebih lama dibandingkan Linear Regression  
+  - Rentan terhadap *overfitting*  
+
+### **Pemilihan Model Terbaik**  
+Berdasarkan hasil evaluasi pada data uji, model dengan performa terbaik dipilih berdasarkan **MAE terendah, MSE terendah, dan R² tertinggi**.  
+
+Jika dibandingkan, **Linear Regression menunjukkan performa terbaik** dengan **R² paling tinggi** dalam menjelaskan variabilitas nilai ujian.  
+
+### **Kesimpulan**  
+**Linear Regression dipilih sebagai model terbaik karena:**  
+- Memberikan hasil prediksi yang paling akurat dalam konteks dataset yang digunakan.  
+- Memiliki interpretasi yang lebih sederhana, memudahkan analisis hubungan antar fitur.  
+- Performa lebih stabil dibandingkan **Random Forest, SVM Regressor, dan Gradient Boosting** dalam menangkap pola data tanpa kompleksitas tambahan.
+
+
+## Evaluasi Model  
+
+Untuk menilai performa model regresi dalam memprediksi nilai ujian mahasiswa, digunakan tiga metrik utama: **Mean Absolute Error (MAE), Mean Squared Error (MSE), dan R-Squared (R²)**.  
+
+1. **MAE** mengukur rata-rata selisih absolut antara nilai aktual dan hasil prediksi, menunjukkan seberapa jauh estimasi model dari kenyataan. Sebagai contoh, jika model memperkirakan nilai ujian **82**, tetapi nilai sebenarnya **79**, maka selisihnya **3**, yang akan berkontribusi dalam perhitungan MAE. Metrik ini memberikan gambaran langsung tentang akurasi prediksi tanpa memperhitungkan outlier secara berlebihan.  
+
+2. **MSE** menghitung rata-rata kuadrat dari selisih antara prediksi dan nilai aktual, dengan penalti lebih tinggi untuk kesalahan besar. Misalnya, jika selisih prediksi adalah **3**, maka setelah dikuadratkan menjadi **9**, mencerminkan dampak kesalahan yang lebih besar dalam evaluasi model. MSE berguna untuk menyoroti model yang sering membuat kesalahan ekstrem, sehingga lebih sensitif dibandingkan MAE.  
+
+3. **R-Squared (R²)** menilai sejauh mana model dapat menjelaskan variasi dalam data. Dalam dataset ini, **Linear Regression mencapai R² sebesar 0.89**, menunjukkan bahwa model berhasil menjelaskan **89% variabilitas dalam nilai ujian** berdasarkan fitur gaya hidup mahasiswa. Nilai ini menandakan bahwa hubungan antara variabel input dan output cukup linear, membuat model ini lebih unggul dibandingkan metode lain seperti **Random Forest, SVM Regressor, dan Gradient Boosting Regressor**, yang tidak menunjukkan peningkatan performa signifikan.  
+
+### **Hasil Performa Model**  
+Berikut adalah perbandingan hasil evaluasi dari empat algoritma regresi yang digunakan dalam analisis nilai ujian mahasiswa:
+
+| **Model**                  | **MAE**  | **MSE**  | **R²**  |
+|----------------------------|---------|---------|---------|
+| Linear Regression          | **4.36** | **28.30** | **0.89** |
+| Random Forest Regressor    | **4.99** | **38.35** | **0.85** |
+| SVM Regressor              | **5.43** | **50.70** | **0.80** |
+| Gradient Boosting Regressor | **4.77** | **32.67** | **0.87** |
+
+Berdasarkan hasil evaluasi ini, dapat disimpulkan bahwa **Linear Regression menunjukkan performa terbaik** karena:
+- Memiliki **nilai R² tertinggi (0.89)**, menunjukkan bahwa model dapat menjelaskan 89% variabilitas nilai ujian mahasiswa  
+- **Nilai MSE lebih rendah**, yang mencerminkan konsistensi prediksi model  
+- **MAE cukup kecil**, artinya rata-rata kesalahan prediksinya lebih rendah dibandingkan model lain  
+
+## Evaluasi Deskriptif  
+
+Proyek ini berfokus pada **prediksi performa akademik mahasiswa** untuk mengidentifikasi faktor-faktor yang paling berpengaruh terhadap nilai ujian mereka. Dengan pemanfaatan *machine learning*, analisis ini memungkinkan pengambilan keputusan yang lebih akurat dan efisien dalam memahami keterkaitan antara kebiasaan mahasiswa dengan hasil akademik mereka. Model yang digunakan diharapkan dapat meningkatkan prediksi performa akademik serta memberikan wawasan tentang pola belajar yang efektif berdasarkan fitur gaya hidup mahasiswa.  
+
+### **Evaluasi terhadap Problem Statement**  
+
+#### **Fitur apa yang paling berpengaruh terhadap nilai ujian mahasiswa (exam score)?**  
+Masalah ini telah dianalisis melalui **eksplorasi data dan feature importance** dari model regresi yang digunakan. Fitur-fitur yang berkontribusi signifikan terhadap nilai ujian mahasiswa akan dibahas lebih lanjut di bagian **Evaluasi Goals**, memberikan wawasan tentang faktor utama yang mempengaruhi keberhasilan akademik.  
+
+#### **Apa model terbaik yang dapat digunakan untuk memprediksi nilai ujian mahasiswa (exam score)?**  
+Proses ini telah diselesaikan dengan membangun empat model regresi: **Linear Regression (baseline), Random Forest Regressor, SVM Regressor, dan Gradient Boosting Regressor**. Model ini membantu dalam menghasilkan prediksi yang lebih akurat terkait nilai ujian mahasiswa. Hasil evaluasi menunjukkan bahwa **Linear Regression memberikan performa terbaik**, dengan R² paling tinggi, menjadikannya model unggulan dalam analisis ini.  
+
+### **Evaluasi terhadap Goals**  
+
+#### **Mengetahui fitur yang paling berkorelasi dengan nilai ujian**  
+Tujuan ini telah tercapai melalui **analisis korelasi dan feature importance**, memberikan pemahaman yang lebih mendalam tentang faktor-faktor yang paling berpengaruh terhadap performa akademik. Fitur **study_hours, mental_health_rating, dan diet_quality** terbukti memiliki dampak yang paling signifikan terhadap hasil ujian.  
+
+#### **Membuat model *machine learning* untuk memprediksi nilai ujian**  
+Model **Linear Regression, Random Forest Regressor, SVM Regressor, dan Gradient Boosting Regressor** telah dibandingkan berdasarkan **MAE, MSE, dan R²** untuk menentukan performa terbaik. Berdasarkan evaluasi, **Linear Regression** menunjukkan hasil terbaik dengan R² tertinggi sebesar **0.89**, menjadikannya model yang paling efektif dalam menangkap pola hubungan antar fitur.  
+
+### **Evaluasi terhadap Solution Statements**  
+
+- **Membangun model baseline dengan Linear Regression**  
+Model baseline telah dikembangkan sebagai tolok ukur awal untuk menilai performa model lainnya.  
+
+- **Membangun model alternatif dengan Random Forest, SVM, dan Gradient Boosting**  
+Ketiga model ini berhasil dikembangkan sebagai perbandingan terhadap Linear Regression, dengan hasil yang menunjukkan bahwa hubungan antar fitur lebih bersifat linear.  
+
+- **Mengukur performa model menggunakan MAE, MSE, dan R² Score**  
+Evaluasi dilakukan dengan tiga metrik utama untuk memastikan hasil yang objektif dan menyeluruh.  
+
+- **Memilih model terbaik berdasarkan evaluasi metrik**  
+Model **Linear Regression dipilih sebagai model final** karena memiliki **MAE dan MSE lebih rendah serta R² tertinggi**, menjadikannya pilihan terbaik untuk analisis akademik mahasiswa.  
+
+### **Kesimpulan Evaluasi**  
+
+Dengan menggunakan model yang telah dikembangkan, khususnya **Linear Regression**, diharapkan analisis ini dapat memberikan manfaat dalam meningkatkan pemahaman tentang performa akademik mahasiswa, termasuk:  
+
+- **Prediksi nilai ujian yang akurat**, membantu dalam perencanaan strategi belajar yang lebih efektif  
+- **Identifikasi faktor utama dalam keberhasilan akademik**, memungkinkan rekomendasi intervensi yang lebih tepat sasaran  
+- **Optimasi pola belajar dan keseimbangan gaya hidup mahasiswa**, berkontribusi pada peningkatan produktivitas akademik  
+- **Pemanfaatan teknologi dalam analisis pendidikan**, mendukung pengambilan keputusan berbasis data untuk optimalisasi performa mahasiswa 
+
