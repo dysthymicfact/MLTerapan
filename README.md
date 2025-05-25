@@ -55,7 +55,7 @@ Deskripsi variabel-variabel (fitur) yang terdapat dalam dataset "Student Habits 
 - exam_score: nilai akhir ujian mahasiswa, dalam format bilangan desimal. Variabel ini bersifat numerik (rasio) dan menjadi variabel target utama yang akan dianalisis dalam kaitannya dengan variabel-variabel lainnya
 
 
-**Rubrik/Kriteria Tambahan**
+**Rubrik/Kriteria Tambahan**\
 Melakukan Exploratory Data Analysis (EDA) secara bertahap:
 1. Mengecek informasi pada dataset dengan fungsi `info()`\
    ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/infodataset.png?raw=true) \
