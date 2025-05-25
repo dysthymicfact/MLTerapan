@@ -34,9 +34,9 @@ Analisis kinerja akademik mahasiswa bertujuan untuk memahami faktor-faktor utama
 - Memilih model terbaik berdasarkan nilai MAE dan MSE terendah serta R2 Score tertinggi
 
 ## Data Understanding
-Dataset yang digunakan dalam proyek ini adalah "Student Habits vs Academic Performance", dapat diakses dan diunduh dari platform Kaggle melalui [tautan](https://www.kaggle.com/datasets/jayaantanaath/student-habits-vs-academic-performance/croissant/download). Dataset ini berisi informasi mengenai berbagai kebiasaan belajar dan gaya hidup mahasiswa serta nilai ujian akhir mereka. Tujuan dari penggunaan dataset ini adalah untuk menganalisis potensi hubungan antara kebiasaan-kebiasaan tersebut dengan kinerja akademik mahasiswa.
+Dataset yang digunakan dalam proyek ini adalah "Student Habits vs Academic Performance", dapat diakses dan diunduh dari platform Kaggle melalui [tautan](https://www.kaggle.com/datasets/jayaantanaath/student-habits-vs-academic-performance/croissant). Dataset ini memiliki 1000 baris dan 16 kolom yang berisi informasi mengenai berbagai kebiasaan belajar dan gaya hidup mahasiswa serta nilai ujian akhir mereka. Tujuan dari penggunaan dataset ini adalah untuk menganalisis potensi hubungan antara kebiasaan-kebiasaan tersebut dengan kinerja akademik mahasiswa.
 
-Variabel-variabel (fitur) yang terdapat dalam dataset "Student Habits vs Academic Performance" adalah sebagai berikut:
+Deskripsi variabel-variabel (fitur) yang terdapat dalam dataset "Student Habits vs Academic Performance" adalah sebagai berikut:
 - student_id: kode unik atau identifikasi untuk setiap mahasiswa dalam dataset
 - age: usia mahasiswa dalam format bilangan bulat
 - gender: menunjukkan jenis kelamin mahasiswa, yang dikategorikan sebagai female, male atau other
@@ -58,12 +58,13 @@ Variabel-variabel (fitur) yang terdapat dalam dataset "Student Habits vs Academi
 **Rubrik/Kriteria Tambahan**
 Melakukan Exploratory Data Analysis (EDA) secara bertahap:
 1. Mengecek informasi pada dataset dengan fungsi `info()`\
+   ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/infodataset.png?raw=true) \
    **Informasi yang dihasilkan:**
    - Terdapat 7 kolom bertipe object yaitu student_id, gender, part_time_job, diet_quality, parental_education_level, internet_quality dan extracurricular_participation
    - Terdapat 3 kolom bertipe integer yaitu age, exercise_frequency, dan mental_health_rating
    - Terdapat 6 kolom bertipe float54 yaitu study_hours_per_day, social_media_hours, netflix_hours, attendace_percentage, sleep_hours, dan exam_score
 
-2. Mengecek deskripsi statistik dengan fungsi `describe()`\
+3. Mengecek deskripsi statistik dengan fungsi `describe()`\
    **Informasi yang dihasilkan:**
    - Study hours vs Entertainment (social media dan netflix hours) \
      Rata-rata waktu belajar adalah 3,5 jam per hari tetapi waktu rata-rata bermain sosial media 2,5 jam dan netflix 1,82 jam. Apabila waktu bermain socmed dan netflix dijumlahkan maka lebih banyak waktu yang digunakan untuk hiburan daripada belajar
@@ -76,18 +77,18 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
    - Mental health rating \
      Rata-rata kesehatan mental mahasiswa adalah 5,44 dari 10 dengan standar deviasi 2,85 menunjukkan variasi yang cukup besar. Perlu ditelusuri lebih lanjut faktor eksternal lainnya (seperti pola hidup dan kebiasaan mahasiswa)
 
-3. Mengecek dan menangani missing value dengan fungsi `isnull().sum()` serta data duplikat dengan fungsi `duplicated().sum()`
+4. Mengecek dan menangani missing value dengan fungsi `isnull().sum()` serta data duplikat dengan fungsi `duplicated().sum()`
    **Informasi yang diperoleh:**
    - Terdapat 91 nilai kosong pada fitur kolom parental_education_level dan tidak ditemukan duplikasi data
    - Mengisi missing values dengan nilai kosong dalam fitur kolom parental_education_level karena merupakan fitur kategorikal sehingga missing values menjadi tidak terdapat pada seluruh kolom fitur
 
-4. Mendeteksi outlier pada kolom fitur numerik </br>
+3. Mendeteksi outlier pada kolom fitur numerik </br>
    Visualisasi: </br>
    ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/pict1.png?raw=true)
     **Informasi yang diperoleh:** </br>
     Hanya sedikit data outlier yang ditemukan pada kolom fitur numerik yaitu pada study_hours_per_day, social_media_hours, netflix_hours, attendance_percentage dan exam_score. Outlier ini dibiarkan karena dapat membantu model belajar pola yang lebih umum tanpa dipengaruhi oleh data ekstrem yang mungkin tidak merepresentasikan populasi sebenarnya
 
-5. Melakukan univariate analysis terhadap masing-masing fitur dengan `countplot` dan `histogram` </br>
+4. Melakukan univariate analysis terhadap masing-masing fitur dengan `countplot` dan `histogram` </br>
    **Informasi yang dihasilkan:** </br>
    a. Fitur Kategorikal 
    - Grafik fitur gender menunjukkan bahwa persentase perempuan hampir imbang dengan laki-laki yakni 48,1% (481 sampel) dan 47,7% (477 sampel), sedangkan sisanya adalah lainnya sebesar 4,2% (42 sampel) \
@@ -165,9 +166,13 @@ b. Fitur Numerikal (menggunakan `pairplot` dan `heatmap`) \
     
 ## Data Preparation
 Tahap ini dilakukan untuk mempersiapkan data supaya siap untuk proses pemodelan. Adapun beberapa tahapan persiapan data, yaitu:
-1. Seleksi fitur \
+1. Mengecek dan menangani missing value dengan fungsi `isnull().sum()` serta data duplikat dengan fungsi `duplicated().sum()` \
+   **Informasi yang diperoleh:**
+   - Terdapat 91 nilai kosong pada fitur kolom parental_education_level dan tidak ditemukan duplikasi data
+   - Mengisi missing values dengan nilai kosong dalam fitur kolom parental_education_level karena merupakan fitur kategorikal sehingga missing values menjadi tidak terdapat pada seluruh kolom fitur
+2. Seleksi fitur \
    Pada bagian ini, fitur student_id, age, dan attendance_percentage di drop karena memiliki korelasi yang rendah terhadap fitur target nilai ujian (exam_score)
-2. Encoding fitur kategori \
+3. Encoding fitur kategori \
    Bagian ini dilakukan karena model regresi membutuhkan input numerik. Oleh karena itu, fitur kategori bertipe object perlu dikonversi ke bentuk numerik agar model dapat memahami data dengan baik. Encoding dilakukan dalam dua metode berikut:\
    1). Label Encoding
     - Mengonversi kategori menjadi integer (0, 1, 2, ... n) berdasarkan urutan yang logis 
@@ -176,9 +181,9 @@ Tahap ini dilakukan untuk mempersiapkan data supaya siap untuk proses pemodelan.
     - Mengubah setiap kategori menjadi kolom biner terpisah untuk fitur yang tidak memiliki urutan logis 
     - Digunakan untuk gender, part_time_job, diet_quality, dan extracurricular_participation, karena kategori dalam fitur ini bersifat nominal dan tidak memiliki hubungan berjenjang antar nilai 
     - Parameter `drop_first=True` digunakan agar menghindari dummy variable trap, sehingga hanya satu kolom yang dibuat untuk setiap variabel biner 
-3. Dataset Splitting \
+4. Dataset Splitting \
    Target utama adalah fitur exam_score, yang akan digunakan untuk mengukur akurasi prediksi kategori kelas prestasi terbaik. Oleh karena itu, fitur ini akan dipisahkan dari data utama dan disimpan dalam variabel baru. Dataset dibagi menjadi data training (80%) untuk melatih model dan data testing (20%) untuk menguji performa model menggunakan data yang belum dilatih. Pembagian dilakukan dengan train_test_split dari scikit-learn, memastikan distribusi data tetap representatif
-4. Feature Scaling (Standardisasi) \
+5. Feature Scaling (Standardisasi) \
    Pada bagian ini, digunakan `StandardScaler` terhadap data yang telab di split sebelumnya. Hasilnya distribusi angka rentang 1,0,-1. Hal ini dilakukan agar algoritma tidak terpengaruh oleh perbedaan skala antar fitur
 
 
