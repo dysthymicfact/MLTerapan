@@ -64,7 +64,7 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
    - Terdapat 3 kolom bertipe integer yaitu age, exercise_frequency, dan mental_health_rating
    - Terdapat 6 kolom bertipe float54 yaitu study_hours_per_day, social_media_hours, netflix_hours, attendace_percentage, sleep_hours, dan exam_score
 
-3. Mengecek deskripsi statistik dengan fungsi `describe()`\
+2. Mengecek deskripsi statistik dengan fungsi `describe()`\
    **Informasi yang dihasilkan:**
    - Study hours vs Entertainment (social media dan netflix hours) \
      Rata-rata waktu belajar adalah 3,5 jam per hari tetapi waktu rata-rata bermain sosial media 2,5 jam dan netflix 1,82 jam. Apabila waktu bermain socmed dan netflix dijumlahkan maka lebih banyak waktu yang digunakan untuk hiburan daripada belajar
@@ -76,11 +76,6 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
      Rata-rata kehadiran adalah 84,135 tetapi nilai ujian 69,60. Perlu ditelusuri alasan lain penyebab nilai ujian cenderung rendah
    - Mental health rating \
      Rata-rata kesehatan mental mahasiswa adalah 5,44 dari 10 dengan standar deviasi 2,85 menunjukkan variasi yang cukup besar. Perlu ditelusuri lebih lanjut faktor eksternal lainnya (seperti pola hidup dan kebiasaan mahasiswa)
-
-4. Mengecek dan menangani missing value dengan fungsi `isnull().sum()` serta data duplikat dengan fungsi `duplicated().sum()`
-   **Informasi yang diperoleh:**
-   - Terdapat 91 nilai kosong pada fitur kolom parental_education_level dan tidak ditemukan duplikasi data
-   - Mengisi missing values dengan nilai kosong dalam fitur kolom parental_education_level karena merupakan fitur kategorikal sehingga missing values menjadi tidak terdapat pada seluruh kolom fitur
 
 3. Mendeteksi outlier pada kolom fitur numerik </br>
    Visualisasi: </br>
@@ -122,7 +117,7 @@ Melakukan Exploratory Data Analysis (EDA) secara bertahap:
     Visualisasi: \
     ![alt text](https://github.com/dysthymicfact/MLTerapan/blob/main/images/numericfeatures.png?raw=true) 
 
-6. Melakukan multivariate analysis untuk menilai relasi antar fitur terhadap fitur target (exam_score) \
+5. Melakukan multivariate analysis untuk menilai relasi antar fitur terhadap fitur target (exam_score) \
  a. Fitur Kategorikal (menggunakan `catplot`) 
    - Fitur gender \
     Visualisasi: \
